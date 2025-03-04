@@ -1,0 +1,73 @@
+.bullet-container {
+    display: flex;
+    justify-content: space-between; /* Spread items left & right */
+    list-style: none;
+    padding: 0;
+    width: 80%; /* Adjust width */
+    margin: auto; /* Center the container */
+}
+
+*{
+    box-sizing: border-box;
+}
+
+.bullet-item {
+    width: 40%; /* Adjust width */
+    font-size: 24px;
+    color: rgb(255, 0, 0);
+    text-align: center;
+    position: relative;
+}
+
+/* Custom Bullet Above */
+.bullet-item::before {
+    content: '';
+    width: 30px;
+    height: 30px;
+    background-image: url('bullet2.png');
+    background-size: cover;
+    display : inline-block;
+    position: relative;
+    top : 7px;
+    /* Space between bullet and text */
+}
+
+/* Centered Text */
+.bullet-item a {
+    font-family: 'CustomFont', sans-serif;
+    text-decoration: none;
+    color: rgb(245, 7, 7);
+}
+
+@font-face {
+    font-family: 'CustomFont1';
+    src: url('truthwillout.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'CustomFont';
+    src: url('font.ttf') format('truetype');
+}
+/* Image Below the Bullet */
+.bullet-item img {
+    width: 300px; /* Adjust size */
+    height: auto;
+    display: block;
+    margin: auto;
+    border: 3px solid rgb(6, 1, 1);
+    border-radius: 10px;
+    margin-top: 10px; /* Space between text and image */
+}
+body {
+    background-image: url('Red\ And\ Black\ Scary\ Spooky\ Skull\ On\ Table\ Halloween\ Greeting\ Instagram\ Post\ \(1\).jpg'); /* Your background image */
+    background-size: cover; /* Covers the whole screen */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* No repetition */
+    background-attachment: fixed; /* Stays fixed while scrolling */
+    color: rgb(255, 255, 255); /* Text color for contrast */
+    font-family: 'CustomFont', cursive; /* Horror-style font */
+}
+
+
+
+
