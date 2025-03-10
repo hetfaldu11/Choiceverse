@@ -24,7 +24,7 @@
     content: '';
     width: 30px;
     height: 30px;
-    background-image: url('bullet2.png');
+    /* background-image: url('bullet2.png'); */
     background-size: cover;
     display : inline-block;
     position: relative;
@@ -67,7 +67,21 @@ body {
     color: rgb(255, 255, 255); /* Text color for contrast */
     font-family: 'CustomFont', cursive; /* Horror-style font */
 }
+a {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
+/* Change color and scale on click */
+a:hover {
+    transform: scale(0.95);
+}
+
+a:active{
+    text-decoration: underline;
+}
 
 
 

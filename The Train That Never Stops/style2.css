@@ -60,6 +60,7 @@ body {
     font-family: 'CustomFont1', sans-serif; /* Custom font */
     
 }
+
 a {
     display: inline-block;
     color: #fff;
@@ -75,6 +76,3 @@ a:hover {
 a:active{
     text-decoration: underline;
 }
-
-
-
