@@ -20,7 +20,7 @@
     content: '';
     width: 30px;
     height: 30px;
-    background-image: url('bullettrain.png');
+    /* background-image: url('bullettrain.png'); */
     background-size: cover;
     display : inline-block;
     position: relative;
@@ -63,3 +63,18 @@ body {
 
 
 
+a {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Change color and scale on click */
+a:hover {
+    transform: scale(0.95);
+}
+
+a:active{
+    text-decoration: underline;
+}
