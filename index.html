@@ -1,43 +1,630 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>My Page Title</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <style>
-    ul {
-      text-decoration: none;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChoiceVerse - Interactive Story Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    a {
-      display: inline-block;
-      color: #000000;
-      text-decoration: none;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
 
-    /* Change color and scale on click */
-    a:hover {
-      transform: scale(0.95);
-    }
+        body {
+            background-color: #f8f4ee;
+            color: #2a2118;
+            line-height: 1.6;
+            font-family: 'Cormorant Garamond', serif;
+            padding-top: 80px;
+        }
 
-    a:active {
-      text-decoration: underline;
-    }
-  </style>
+        h1, h2, h3 {
+            font-family: 'Cinzel Decorative', cursive;
+            font-weight: 700;
+        }
 
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background-color: #1a120b;
+            color: #f8f4ee;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.8rem;
+            color: #d4af37;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a {
+            color: #f8f4ee;
+            text-decoration: none;
+            margin-left: 1.8rem;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #d4af37;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(26, 18, 11, 0.7), rgba(26, 18, 11, 0.7)), url('https://images.unsplash.com/photo-1535905557558-afc4877a26fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: #f8f4ee;
+            text-align: center;
+            padding: 8rem 1rem 5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: -80px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: #d4af37;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-style: italic;
+        }
+
+        /* Featured Stories */
+        .featured-stories {
+            padding: 4rem 1rem;
+            background-color: #f0e8dd;
+            text-align: center;
+        }
+
+        .featured-stories h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1a120b;
+            position: relative;
+            display: inline-block;
+        }
+
+        .featured-stories h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            bottom: -10px;
+            left: 25%;
+            background-color: #d4af37;
+        }
+
+        .featured-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .featured-story {
+            width: 300px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: #2a2118;
+        }
+
+        .featured-story:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .featured-story img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid #d4af37;
+        }
+
+        .featured-story h3 {
+            padding: 1.5rem 1rem 0.5rem;
+            color: #1a120b;
+        }
+
+        .featured-story p {
+            padding: 0 1rem 1.5rem;
+            color: #5a4a3a;
+            font-size: 0.95rem;
+        }
+
+        .more-btn {
+            background-color: #1a120b;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .more-btn:hover {
+            background-color: #d4af37;
+            color: #1a120b;
+        }
+
+        /* All Stories Section */
+        .all-stories-section {
+            padding: 5rem 1rem;
+            background-color: #f8f4ee;
+        }
+
+        .all-stories-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1a120b;
+            position: relative;
+        }
+
+        .all-stories-section h2::after {
+            content: '';
+            position: absolute;
+            width: 30%;
+            height: 3px;
+            bottom: -10px;
+            left: 35%;
+            background-color: #d4af37;
+        }
+
+        .stories-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .story-card {
+            display: flex;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+            border-left: 5px solid #d4af37;
+            padding-top: 80px;
+            margin-top: -80px;
+        }
+
+        #story1.story-card {
+            margin-top: -160px;
+            padding-top: 160px;
+        }
+
+        .story-card img {
+            width: 300px;
+            height: auto;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .story-card:hover img {
+            transform: scale(1.03);
+        }
+
+        .story-content {
+            padding: 2rem;
+            flex: 1;
+        }
+
+        .story-content h3 {
+            color: #1a120b;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .story-content p {
+            color: #5a4a3a;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .continue-btn {
+            display: inline-block;
+            background-color: #1a120b;
+            color: #d4af37;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-weight: 700;
+            border: 2px solid #1a120b;
+        }
+
+        .continue-btn:hover {
+            background-color: #d4af37;
+            color: #1a120b;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 1rem;
+            background-color: #1a120b;
+            text-align: center;
+            color: #f8f4ee;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #d4af37;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(248, 244, 238, 0.1);
+            border-radius: 8px;
+            border: 1px solid #d4af37;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #d4af37;
+            border-radius: 4px;
+            font-size: 1rem;
+            background-color: rgba(248, 244, 238, 0.1);
+            color: #f8f4ee;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background-color: #d4af37;
+            color: #1a120b;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Cinzel Decorative', cursive;
+            font-weight: 700;
+            width: 100%;
+        }
+
+        .contact-form button:hover {
+            background-color: #f8f4ee;
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            padding: 5rem 1rem;
+            background-color: #f0e8dd;
+            text-align: center;
+        }
+
+        .feedback-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1a120b;
+        }
+
+        .feedback-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .rating {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stars {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .stars span {
+            font-size: 2rem;
+            color: #c0b283;
+        }
+
+        .feedback-form textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 1rem;
+            border: 1px solid #d4af37;
+            border-radius: 4px;
+            font-size: 1rem;
+            resize: vertical;
+            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 1.5rem;
+        }
+
+        .feedback-form button {
+            background-color: #1a120b;
+            color: #d4af37;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Cinzel Decorative', cursive;
+            width: 100%;
+        }
+
+        .feedback-form button:hover {
+            background-color: #2a2118;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: #1a120b;
+            color: #d4af37;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .story-card {
+                flex-direction: column;
+            }
+
+            .story-card img {
+                width: 100%;
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .featured-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .featured-story {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .story-content h3 {
+                font-size: 1.5rem;
+            }
+        }
+        #brief{
+            font-size: larger;
+        }
+    </style>
 </head>
-
 <body>
-  <h1>
-    This main index page is under construction you choose story from given option and continue.Must try Mystery of BlackWood Manor and The train that never stop.
-    <ul>
-      <li><a href="Love In Parallel/index.html">Love In Parallel</a></li>
-      <li><a href="Mystery of Blackwood Manor/index.html">Mystery of BlackWood Manor</a></li>
-      <li><a href="The Infinite Paradox/index.html">The Infinite Paradox</a></li>
-      <li><a href="The Train That Never Stops/index.html">The Train That Never Stops</a></li>
-      <li><a href="Vanishing Vault/index.html">Vanishing Vault</a></li>
-    </ul>
-  </h1>
-</body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">ChoiceVerse</a>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#all-stories">All Stories</a>
+                <a href="#contact">Contact</a>
+                <a href="#feedback">Feedback</a>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>ChoiceVerse</h1>
+            <p>Where every decision shapes your destiny</p>
+        </div>
+    </section>
+
+    <!-- Featured Stories -->
+    <section class="featured-stories">
+        <h2>Featured Adventures</h2>
+        <div class="featured-container">
+            <!-- Love In Parallel -->
+            <a href="#neverending-train" class="featured-story">
+                <img src="Train.jpg" alt="The Train That Never Stop">
+                <h3>The Train That Never Stop</h3>
+                <p>A haunted train with strange peoples and train has no stops</p>
+            </a>
+
+            <!-- Mystery of Blackwood Manor -->
+            <a href="#blackwood-manor" class="featured-story">
+                <img src="Manor.jpg" alt="Mystery of Blackwood Manor">
+                <h3>Mystery of Blackwood Manor</h3>
+                <p>A haunted mansion holds secrets that might not let you leave alive</p>
+            </a>
+        </div>
+        <a href="#all-stories" class="more-btn">Discover All Stories</a>
+    </section>
+
+    <!-- All Stories Section -->
+    <section id="all-stories" class="all-stories-section">
+        <h2>Our Story Collection</h2>
+        <div class="stories-container">
+           
+            <!-- The Train That Never Stops -->
+            <div id="neverending-train" class="story-card">
+                <img src="TrainMain.jpg" alt="The Train That Never Stops">
+                <div class="story-content">
+                    <h3>The Train That Never Stops</h3>
+                    <p id="brief">The train rumbles beneath your feet as city lights fade into endless forests. You don't remember boarding. The last thing you recall is walking home late at night, then... nothing. A voice crackles: "Next stop... NEVER." Passengers sit silent, staring ahead, not blinking. Something feels wrong. Will you ask where the train is going, or explore its mysterious cars?</p>
+                    <a href="The Train That Never Stops/index.html" class="continue-btn">Begin This Story</a>
+                </div>
+            </div>
+
+            
+            <!-- Mystery of Blackwood Manor -->
+            <div id="blackwood-manor" class="story-card">
+                <img src="ManorMain.avif" alt="Mystery of Blackwood Manor">
+                <div class="story-content">
+                    <h3>Mystery of Blackwood Manor</h3>
+                    <p id="brief">You wake up in a cold, dark room. The last thing you remember is your car breaking down near an abandoned mansion. The wind howls outside, and the flickering candlelight casts eerie shadows on the walls. A note lies on the wooden table: "Welcome to Blackwood Manor. If you want to leave, find the truth." You hear a creak behind you. Someone or something is here.</p>
+                    <a href="Mystery of Blackwood Manor/index.html" class="continue-btn">Begin This Story</a>
+                </div>
+            </div>
+            
+            <!-- Love In Parallel -->
+            <div id="love-in-parallel" class="story-card">
+                <img src="LoveMain.png" alt="Love In Parallel">
+                <div class="story-content">
+                    <h3>Love In Parallel</h3>
+                    <p id="brief">You wake up in an unfamiliar room, disoriented. As you explore, you realize something is off—objects you don't remember, photos with unfamiliar details. Then, your phone rings. Two different names appear on the screen: Alex (your childhood best friend & long-term love) and Ethan/Emily (your fiancé, whom you don't recall meeting). Which life will you choose?</p>
+                    <a href="Love In Parallel/index.html" class="continue-btn">Begin This Story</a>
+                </div>
+            </div>
+            
+            <!-- The Infinite Paradox -->
+            <div id="infinite-paradox" class="story-card">
+                <img src="ParadoxMain.jpg" alt="The Infinite Paradox">
+                <div class="story-content">
+                    <h3>The Infinite Paradox</h3>
+                    <p id="brief">You are Dr. Elias Carter, a brilliant but reckless physicist working on Project Paradox - an experiment to unlock a new dimension where reality can be rewritten. During the final test, something goes wrong. The machine overloads, and you're pulled into a world where time, space, and logic no longer follow normal rules. Navigate fractured realities and uncover the true purpose behind Project Paradox.</p>
+                    <a href="The Infinite Paradox/index.html" class="continue-btn">Begin This Story</a>
+                </div>
+            </div>
+
+
+            <!-- Vanishing Vault -->
+            <div id="vanishing-vault" class="story-card">
+                <img src="VaultMain.jpg" alt="Vanishing Vault">
+                <div class="story-content">
+                    <h3>Vanishing Vault</h3>
+                    <p id="brief">Summoned by The Athena Initiative, you're briefed on an impossible crime: A top-security vault storing international secrets vanished overnight. No forced entry, no tampering detected. Your mission: Figure out who, how, and why before a global crisis erupts. Will you suspect an inside job, analyze the security system, or investigate the strange energy anomaly near the site?</p>
+                    <a href="Vanishing Vault/index.html" class="continue-btn">Begin This Story</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="contact-section">
+        <h2>Contact Us</h2>
+        <div class="contact-form">
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section id="feedback" class="feedback-section">
+        <h2>Share Your Feedback</h2>
+        <div class="feedback-form">
+            <form>
+                <textarea placeholder="What did you think of our stories? We'd love to hear your suggestions..." required></textarea>
+                <button type="submit">Submit Feedback</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>&copy; 2025 ChoiceVerse. All stories are works of fiction.</p>
+    </footer>
+</body>
 </html>
