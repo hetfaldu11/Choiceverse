@@ -58,14 +58,14 @@
 
 body {
     margin-top: 100px;
-    /* background-image: url('trainback.png'); Your background image */
-    background-color: black;
+    background-image: url('trainback.png'); /* Your background image */
     background-size: cover; /* Covers the whole screen */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* No repetition */
     background-attachment: fixed; /* Stays fixed while scrolling */
     color: rgb(210, 211, 211); /* Text color for contrast */
     font-family: 'CustomFont1', sans-serif; /* Custom font */
+    
 }
 a {
     display: inline-block;
